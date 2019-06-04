@@ -21,6 +21,9 @@ src/src
 src/static-analysis.xml
 
 vendor/
+node_modules/
+build
+.npm/
 
 # IDEs:
 .idea/
@@ -29,3 +32,5 @@ vendor/
 # logs:
 *.log
 *.log.*
+/.changelog
+
