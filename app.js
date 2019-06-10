@@ -26,17 +26,19 @@ class ChannelList extends React.Component {
 }
 
 class ChannelForm extends React.Component {
-    // For avoiding the Error when load page on the first time, because
-    // channelName not yet exist
-    constructor(props){
+    // To avoiding errors when loading the page for the first time, because
+    // channelName doesn't exist yet
+    constructor(props) {
         super(props);
         this.state = {};
     }
+
     onChange(e) {
         this.setState({
             channelName: e.target.value
         });
     }
+
     onSubmit(e) {
         let {channelName} = this.state;
         console.log(channelName);
@@ -46,7 +48,8 @@ class ChannelForm extends React.Component {
         this.props.addChannel(channelName);
         e.preventDefault();
     }
-    render(){
+
+    render() {
         return (
             <form onSubmit={this.onSubmit.bind(this)}>
                 <input type='text'
@@ -68,13 +71,15 @@ class ChannelSection extends React.Component {
             ]
         };
     }
-    addChannel(name){
+
+    addChannel(name) {
         let {channels} = this.state;
         channels.push({name: name});
         this.setState({
             channels: channels
         });
     }
+
     render() {
         return (
             <div>
