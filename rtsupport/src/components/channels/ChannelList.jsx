@@ -1,24 +1,27 @@
 import React, {Component} from 'react';
 import Channel from './Channel.jsx';
+import PropTypes from 'prop-types';
 
-class ChannelList extends Component{
-    render() {
-        return (
-            <ul>
-                this.props.channel.map( chan => {
-                <Channel
-                    channel={chan}
-                    setChannel={this.props.setChannel}
-                />
-            }
-            </ul>
-        )
-    }
+class ChannelList extends Component {
+  render() {
+    return (
+      <ul>{
+        this.props.channels.map(chan => {
+          return <Channel
+            channel={chan}
+            key={chan.id}
+            {...this.props}
+          />
+        })
+      }</ul>
+    )
+  }
 }
 
 ChannelList.propTypes = {
-    channels: React.PropTypes.array.isRequired,
-    setChannel: React.PropTypes.func.isRequired
+  channels: PropTypes.array.isRequired,
+  setChannel: PropTypes.func.isRequired,
+  activeChannel: PropTypes.object
 };
 
 export default ChannelList

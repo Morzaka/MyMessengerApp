@@ -1,27 +1,31 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 class Channel extends Component {
-    onClick(e){
-        e.preventDefault();
-        const {setChannel, chennel} = this.props;
-        setChannel(chennel);
-    }
+  onClick(e) {
+    e.preventDefault();
+    const {setChannel, channel} = this.props;
+    setChannel(channel);
+  }
 
-    render() {
-        const {channel} = this.props;
-        return (
-            <li>
-                <a>
-                    {channel.name}
-                </a>
-            </li>
-        )
-    }
+  render() {
+    const {channel, activeChannel} = this.props;
+    const active = activeChannel === channel ? 'active' : '';
+    console.log(activeChannel, channel);
+    return (
+      <li className={active}>
+        <a onClick={this.onClick.bind(this)}>
+          {channel.name}
+        </a>
+      </li>
+    )
+  }
 }
 
-Channel.propType = {
-    channel: React.PropTypes.object.isRequired,
-    setChannel: React.PropTypes.func.isRequired
+Channel.propTypes = {
+  channel: PropTypes.object.isRequired,
+  setChannel: PropTypes.func.isRequired,
+  activeChannel: PropTypes.object
 };
 
-export default Channel;
+export default Channel
