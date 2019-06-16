@@ -7,6 +7,7 @@ See below for instructions.
 
 > ### Run in console:
 
->* ` git clone`
+>* `git clone`
+>* `cd MyMessengerApp`
 >* `npm install`
 >* `npm start`
