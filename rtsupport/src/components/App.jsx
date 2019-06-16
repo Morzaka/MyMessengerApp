@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ChannelSection from './channels/ChannelSection.jsx';
+import '../app.css';
 
 class App extends Component {
   constructor(props) {
@@ -32,8 +33,6 @@ class App extends Component {
           />
         </div>
       </div>
-
-
     )
   }
 }

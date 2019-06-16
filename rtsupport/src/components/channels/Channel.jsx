@@ -11,7 +11,6 @@ class Channel extends Component {
   render() {
     const {channel, activeChannel} = this.props;
     const active = activeChannel === channel ? 'active' : '';
-    console.log(activeChannel, channel);
     return (
       <li className={active}>
         <a onClick={this.onClick.bind(this)}>
