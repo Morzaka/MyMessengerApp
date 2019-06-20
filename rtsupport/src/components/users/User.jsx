@@ -12,7 +12,7 @@ class User extends Component {
 }
 
 User.propTypes = {
-    user: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired
 };
 
 export default User
