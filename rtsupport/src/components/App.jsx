@@ -8,10 +8,17 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      activeChannel: {},
       channels: [],
       users: [],
       messages: []
     };
+    // constructor(props) {
+    //   super(props);
+    //   this.state = {
+    //     date: { date: null },
+    //   }
+    // }
   }
 
   addChannel(name) {
@@ -27,7 +34,8 @@ class App extends Component {
   }
 
   setUserName(name){
-    let {user} = this.props;
+    let {users} = this.state;
+    console.log(users);
     users.push({id: users.length, name});
     this.setState({users});
     //TODO: Send to server
@@ -38,7 +46,7 @@ class App extends Component {
     let createdAt = new Date;
     let author = users.length > 0 ? users[0].name : 'anonymous';
     messages.push({id: messages.length, body, createdAt, author});
-    this.setstate({messages});
+    this.setState({messages});
     // TODO: send to server
   }
 

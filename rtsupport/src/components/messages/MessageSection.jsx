@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import MessageList from './MessageList';
-import MessageForm from './MessageForm';
+import MessageList from './MessageList.jsx';
+import MessageForm from './MessageForm.jsx';
 import PropTypes from 'prop-types';
 
 class MessageSection extends Component {

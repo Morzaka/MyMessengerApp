@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 class MessageForm extends Component {
     onSubmit(e){
         e.preventDefault();
-        const node = this.refs.messafe;
+        const node = this.refs.message;
+        console.log(node);
         const message = node.value;
         this.props.addMessage(message);
         node.value = '';
@@ -24,7 +25,9 @@ class MessageForm extends Component {
         }
         return (
             <form onSubmit={this.onSubmit.bind(this)}>
-                <div className={'form-group'}>{input}</div>
+                <div className={'form-group'}>
+                    {input}
+                </div>
             </form>
         )
     }
@@ -32,7 +35,7 @@ class MessageForm extends Component {
 
 MessageForm.propTypes = {
     activeChannel: PropTypes.object.isRequired,
-    addMessage: React.PropTypes.func.isRequired
+    addMessage: PropTypes.func.isRequired
 };
 
 export default MessageForm
