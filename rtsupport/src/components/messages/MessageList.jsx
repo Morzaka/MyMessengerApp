@@ -20,4 +20,4 @@ MessageList.propTypes = {
     messages: PropTypes.array.isRequired
 };
 
-export default MessageList
+export default MessageList;

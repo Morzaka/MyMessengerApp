@@ -15,4 +15,4 @@ User.propTypes = {
     user: PropTypes.object.isRequired
 };
 
-export default User
+export default User;

@@ -7,7 +7,7 @@ class UserSection extends Component {
     render() {
         return (
             <div className='support card bg-light'>
-                <div className='card-header'>
+                <div className='card-header text-white bg-primary'>
                     <strong>Users</strong>
                 </div>
                 <div className='card-body users'>
@@ -24,4 +24,4 @@ UserSection.propTypes = {
     setUserName: PropTypes.func.isRequired
 };
 
-export default UserSection
+export default UserSection;

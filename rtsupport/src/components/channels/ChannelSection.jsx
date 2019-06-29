@@ -7,7 +7,7 @@ class ChannelSection extends Component {
   render() {
     return (
       <div className='support card bg-light'>
-        <div className='card-header'>
+        <div className='card-header text-white bg-primary'>
           <strong>Channels</strong>
         </div>
         <div className='card-body channels'>
@@ -27,4 +27,4 @@ ChannelSection.propTypes = {
   activeChannel: PropTypes.object.isRequired
 };
 
-export default ChannelSection
+export default ChannelSection;

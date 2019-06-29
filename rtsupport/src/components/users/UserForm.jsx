@@ -30,4 +30,4 @@ UserForm.propTypes = {
     setUserName: PropTypes.func.isRequired
 };
 
-export default UserForm
+export default UserForm;

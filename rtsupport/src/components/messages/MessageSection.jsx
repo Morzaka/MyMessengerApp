@@ -24,4 +24,4 @@ MessageSection.propTypes = {
     addMessage: PropTypes.func.isRequired
 };
 
-export default MessageSection
+export default MessageSection;

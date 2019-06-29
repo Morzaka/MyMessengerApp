@@ -27,4 +27,4 @@ Channel.propTypes = {
   activeChannel: PropTypes.object.isRequired
 };
 
-export default Channel
+export default Channel;

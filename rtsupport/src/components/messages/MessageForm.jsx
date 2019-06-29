@@ -38,4 +38,4 @@ MessageForm.propTypes = {
     addMessage: PropTypes.func.isRequired
 };
 
-export default MessageForm
+export default MessageForm;

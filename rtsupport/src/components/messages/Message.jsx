@@ -22,4 +22,4 @@ Message.propTypes = {
     message: PropTypes.object.isRequired
 };
 
-export default Message
+export default Message;
