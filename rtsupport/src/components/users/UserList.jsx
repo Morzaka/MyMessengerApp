@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 class UserList extends Component {
     render() {
         return (
-            <ul>{
+            <ul className="list-group">{
                 this.props.users.map(usr => {
                     return (
                         <User

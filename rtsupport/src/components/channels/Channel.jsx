@@ -12,7 +12,7 @@ class Channel extends Component {
     const {channel, activeChannel} = this.props;
     const active = activeChannel === channel ? 'active' : '';
     return (
-      <li className={active}>
+      <li className={`${active} list-group-item`}>
         <a onClick={this.onClick.bind(this)}>
           {channel.name}
         </a>

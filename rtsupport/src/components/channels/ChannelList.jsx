@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 class ChannelList extends Component {
   render() {
     return (
-      <ul>{
+      <ul className="list-group">{
         this.props.channels.map(chan => {
           return <Channel
             channel={chan}

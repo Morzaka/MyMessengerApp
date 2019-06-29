@@ -6,11 +6,11 @@ import PropTypes from 'prop-types';
 class UserSection extends Component {
     render() {
         return (
-            <div className='support panel panel-primary'>
-                <div className='panel-heading'>
+            <div className='support card bg-light'>
+                <div className='card-header'>
                     <strong>Users</strong>
                 </div>
-                <div className='panel-body users'>
+                <div className='card-body users'>
                     <UserList {...this.props}/>
                     <UserForm {...this.props} />
                 </div>

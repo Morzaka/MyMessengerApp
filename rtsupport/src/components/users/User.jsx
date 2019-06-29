@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 class User extends Component {
     render() {
         return (
-            <li>
+            <li className="list-group-item">
                 {this.props.user.name}
             </li>
         )
