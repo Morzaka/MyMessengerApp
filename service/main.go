@@ -1,20 +1,36 @@
 package main
 
 import (
-    "log"
-    "net/http"
+	"log"
+	"net/http"
+
+	r "gopkg.in/rethinkdb/rethinkdb-go.v5"
 )
 
 type Channel struct {
-    Id string `json:"id"`
-    Name string `json:"name"`
+	Id   string `json:"id" gorethink:"id,omitempty"`
+	Name string `json:"name" gorethink:"name"`
+}
+
+type User struct {
+	Id   string `gorethink:"id,omitempty"`
+	Name string `gorethink:"name"`
 }
 
 func main() {
-    router := newRouter()
+	session, err := r.Connect(r.ConnectOpts{
+		Address:  "localhost:32769",
+		Database: "rtsupport",
+	})
 
-    router.Handle("channel add", addChannel)
+	if err != nil {
+		log.Panic(err.Error())
+		return
+	}
+	router := NewRouter(session)
 
-    http.Handle("/", router)
-    log.Fatal(http.ListenAndServe(":4000", nil))
+	router.Handle("channel add", addChannel)
+
+	http.Handle("/", router)
+	log.Fatal(http.ListenAndServe(":4000", nil))
 }
