@@ -6,11 +6,11 @@ class UserList extends Component {
     render() {
         return (
             <ul className="list-group">{
-                this.props.users.map(usr => {
+                this.props.users.map(user => {
                     return (
                         <User
-                        user={usr}
-                        key={usr.id}
+                        user={user}
+                        key={user.id}
                     />)
                 })
             }</ul>

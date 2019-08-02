@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 class UserForm extends Component {
-    onSubmit(evnet) {
-        evnet.preventDefault();
+    onSubmit(e) {
+        e.preventDefault();
         const node = this.refs.userName;
         const userName = node.value;
         this.props.setUserName(userName);

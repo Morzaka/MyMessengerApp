@@ -8,7 +8,7 @@ class MessageSection extends Component {
         let {activeChannel} = this.props;
         return (
             <div className='messages-container card bg-light'>
-                <div className='card-header'><strong>{activeChannel.name}</strong></div>
+                <div className='card-header'><strong>{activeChannel.name || 'Select A Channel'}</strong></div>
                 <div className='messages'>
                     <MessageList {...this.props} />
                     <MessageForm {...this.props} />

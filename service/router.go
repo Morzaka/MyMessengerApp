@@ -28,23 +28,24 @@ func NewRouter(session *r.Session) *Router {
 	}
 }
 
-func (rout *Router) Handle(msgName string, handler Handler) {
-	rout.rules[msgName] = handler
+func (r *Router) Handle(msgName string, handler Handler) {
+	r.rules[msgName] = handler
 }
 
-func (rout *Router) FindHandler(msgName string) (Handler, bool) {
-	handler, found := rout.rules[msgName]
+func (r *Router) FindHandler(msgName string) (Handler, bool) {
+	handler, found := r.rules[msgName]
 	return handler, found
 }
 
-func (rout *Router) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+func (e *Router) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	socket, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		_, _ = fmt.Fprint(w, err.Error())
 		return
 	}
-	client := NewClient(socket, rout.FindHandler, rout.session)
+	client := NewClient(socket, e.FindHandler, e.session)
+	defer client.Close()
 	go client.Write()
 	client.Read()
 }

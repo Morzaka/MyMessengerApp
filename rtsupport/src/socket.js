@@ -1,4 +1,4 @@
-import {EventEmitter} from "events";
+import {EventEmitter} from 'events';
 
 class Socket {
     constructor(ws = new WebSocket(), ee = new EventEmitter()) {
@@ -8,28 +8,33 @@ class Socket {
         ws.onopen = this.open.bind(this);
         ws.onclose = this.close.bind(this);
     }
-    on(name, fn){
+
+    on(name, fn) {
         this.ee.on(name, fn);
     }
-    of(name, fn){
+
+    off(name, fn) {
         this.ee.removeListener(name, fn);
     }
-    emit(name, data){
+
+    emit(name, data) {
         const message = JSON.stringify({name, data});
         this.ws.send(message);
     }
+
     message(e) {
         try {
-            const message = JSON.parse(e,data);
+            const message = JSON.parse(e.data);
             this.ee.emit(message.name, message.data);
-        }
-        catch (err) {
-            this.ee,emit('error', err);
+        } catch (err) {
+            this.ee.emit('error', err);
         }
     }
+
     open() {
         this.ee.emit('connect');
     }
+
     close() {
         this.ee.emit('disconnect');
     }

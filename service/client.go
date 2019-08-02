@@ -1,24 +1,35 @@
 package main
 
 import (
-	"log"
-
 	"github.com/gorilla/websocket"
 	r "gopkg.in/rethinkdb/rethinkdb-go.v5"
+	"log"
 )
 
 type FindHandler func(string) (Handler, bool)
 
-type Message struct {
-	Name string      `json:"name"`
-	Data interface{} `json:"data"`
+type Client struct {
+	send         chan Message
+	socket       *websocket.Conn
+	findHandler  FindHandler
+	session      *r.Session
+	stopChannels map[int]chan bool
+	id           string
+	userName     string
 }
 
-type Client struct {
-	send        chan Message
-	socket      *websocket.Conn
-	findHandler FindHandler
-	session     *r.Session
+func (client *Client) NewStopChannel(stopKey int) chan bool {
+	client.StopForKey(stopKey)
+	stop := make(chan bool)
+	client.stopChannels[stopKey] = stop
+	return stop
+}
+
+func (client *Client) StopForKey(key int) {
+	if ch, found := client.stopChannels[key]; found {
+		ch <- true
+		delete(client.stopChannels, key)
+	}
 }
 
 func (client *Client) Read() {
@@ -30,11 +41,8 @@ func (client *Client) Read() {
 		if handler, found := client.findHandler(message.Name); found {
 			handler(client, message.Data)
 		}
-		err := client.socket.Close()
-		if err != nil {
-			log.Println(err.Error())
-		}
 	}
+	_ = client.socket.Close()
 }
 
 func (client *Client) Write() {
@@ -43,17 +51,38 @@ func (client *Client) Write() {
 			break
 		}
 	}
-	err := client.socket.Close()
-	if err != nil {
-		log.Println(err.Error())
-	}
+	_ = client.socket.Close()
 }
 
-func NewClient(socket *websocket.Conn, findHandler FindHandler, session *r.Session) *Client {
+func (client *Client) Close() {
+	for _, ch := range client.stopChannels {
+		ch <- true
+	}
+	close(client.send)
+	// delete user
+	_ = r.Table("user").Get(client.id).Delete().Exec(client.session)
+}
+
+func NewClient(socket *websocket.Conn, findHandler FindHandler,
+	session *r.Session) *Client {
+	var user User
+	user.Name = "anonymous"
+	res, err := r.Table("user").Insert(user).RunWrite(session)
+	if err != nil {
+		log.Println(err.Error())
+		return nil
+	}
+	var id string
+	if len(res.GeneratedKeys) > 0 {
+		id = res.GeneratedKeys[0]
+	}
 	return &Client{
-		send:        make(chan Message),
-		socket:      socket,
-		findHandler: findHandler,
-		session:     session,
+		send:         make(chan Message),
+		socket:       socket,
+		findHandler:  findHandler,
+		session:      session,
+		stopChannels: make(map[int]chan bool),
+		id:           id,
+		userName:     user.Name,
 	}
 }

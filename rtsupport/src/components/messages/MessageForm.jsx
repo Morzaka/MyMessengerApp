@@ -2,10 +2,9 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 class MessageForm extends Component {
-    onSubmit(e){
+    onSubmit(e) {
         e.preventDefault();
         const node = this.refs.message;
-        console.log(node);
         const message = node.value;
         this.props.addMessage(message);
         node.value = '';
@@ -13,7 +12,7 @@ class MessageForm extends Component {
 
     render() {
         let input;
-        if(this.props.activeChannel.id !== undefined){
+        if (this.props.activeChannel.id !== undefined) {
             input = (
                 <input
                     ref='message'
