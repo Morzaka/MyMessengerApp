@@ -8,6 +8,14 @@ See below for instructions.
 > ### Run in console:
 
 >* `git clone`
->* `cd MyMessengerApp`
+
+> #### Start web client on port :4001
+
+>* `cd MyMessengerApp/rtsuppirt`
 >* `npm install`
 >* `npm start`
+
+> #### Start web server on port :4000
+
+>* `cd MyMessengerApp/service`
+>* `go run *.go`
